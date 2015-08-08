@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="parallax-container" style="margin-top:0.5%;height:400px;margin-left:-0.01%;">
+    <div class="parallax"><img src="/static/img/post.jpeg"></div>
+</div>
+
+<article>
+    <div class="container grey lighten-3" style="color:black;margin-top:1.5%;border-radius:15px;">
+        <div class="row">
+            <div class="col s12">
+                <a class="waves-effect waves-light btn grey darken-3" href="{% url 'PyWEB:home' %}" style="padding:6px 20px; margin-top:1%;width:150px;height:50px;">Atras</a>
+                <h2>{{post.titulo}}</h2>
+                <h4>Posted by {{post.autor}}</h5>
+                <h5>{{post.fecha}}</h3>
+                <p>{{post.contenido}} </p>
+            </div>
+        </div>    
+    </div>
+</article>
+{% endblock %}
+
+{% block comentario %}
+
+<div class="container" style="color:black;">
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <h3 class="center" style="color:#424242">Comentarios</h3>
+            <div id="mensajes">
+                {% include 'mensajes.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container grey lighten-3" style="color:#424242;border-radius:20px;">
+    <div class="row center">
+        <div class="col s12">
+            <h3>No tenga miedo de comentar!</h3>
+            {{enviado}}
+            <form action="" method="POST" name="sentMessage" id="comentForm">
+                {% csrf_token %} 
+
+                <div class="row">
+                    <div class="col s8 offset-s2">
+                        <div class="input-field">
+                            <input name="nombre" type="text" class="form-control" style="color:black" id="name" required data-validation-required-message="Please enter your name.">
+                            <label for="name">Nombre</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <div class="input-field">
+                            <textarea name="mensaje" rows="5" class="materialize-textarea" style="color:black" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                            <label for="message">Mensaje</label>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-bottom:1.5%;">
+                    <a id="send_ajax" class="btn waves-effect waves-light grey darken-3" name="action" >Comentar<i class="mdi-content-send right"></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $("#send_ajax").click(function(){
+        console.log("asdasdsaddsa");
+        var data={
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            id:'{{post.id}}',
+            nombre:$('#name').val(),
+            mensaje:$('#message').val(),
+        }
+        $.ajax({
+            type: "POST",
+            url: "{% url 'PyWEB:save_message' %}",
+            data: data,
+            success: function(result){
+                $("#mensajes").html(result);
+            },
+            error: function(err){
+                console.log("ERRRORRRR");
+                console.log(err.responseText);
+            },
+        });
+    });
+</script>
+
+{% endblock %}

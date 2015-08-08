@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div class="container" id="acticont">
+    <div class="row" style="margin-top:2%;">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#calculadora">Calculadora</a></li>
+                <li class="tab col s3"><a href="#conversor">Conversor</a></li>
+                <li class="tab col s3"><a href="#trolea">Tocame</a></li>
+                <li class="tab col s3"><a href="#cronometro">Cronometro</a></li>
+            </ul>
+        </div>
+
+        <!--CALCULADORA-->
+        <div id="calculadora" class="col s12" style="margin-left:-9%;">
+            <div class="card-panel" id="card-panel-calcu">                
+                <div class="calculadora">
+                    <input type="text" id="res" value="" />
+                    <br>
+                    <div class="botoncalc">
+                        <input type="button" id="num1" value="1" onclick="ejecutar(this)"/>
+                        <input type="button" id="num2" value="2" onclick="ejecutar(this)"/>
+                        <input type="button" id="num3" value="3" onclick="ejecutar(this)"/>
+                        <input type="button" id="suma" value="+" onclick="ejecutar(this)"/>
+                        <br>
+                        <input type="button" id="num4" value="4" onclick="ejecutar(this)"/>
+                        <input type="button" id="num5" value="5" onclick="ejecutar(this)"/>
+                        <input type="button" id="num6" value="6" onclick="ejecutar(this)"/>
+                        <input type="button" id="-" value="-" onclick="ejecutar(this)"/>
+                        <br>
+                        <input type="button" id="num7" value="7" onclick="ejecutar(this)"/>
+                        <input type="button" id="num8" value="8" onclick="ejecutar(this)"/>
+                        <input type="button" id="num9" value="9" onclick="ejecutar(this)"/>
+                        <input type="button" id="*" value="*" onclick="ejecutar(this)"/>
+                        <br>
+                        <input type="button" id="punto" value="." onclick="ejecutar(this)"/>
+                        <input type="button" id="num0" value="0" onclick="ejecutar(this)"/>
+                        <input type="button" id="igual" value="=" onclick="ejecutar(this)"/>
+                        <input type="button" id="dividir" value="/" onclick="ejecutar(this)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--CONVERSOR-->
+        <!-- By Mateo de Mayo-->
+        <div id="conversor" class="col s12">
+            <div class="container">
+                <div class="section">
+                    <div class="row center">
+                        <div class="row" id="cont-conversor">
+                            <div class="col s12 m5 l5">
+                                <div class="card-panel white">
+                                    <input  id="cuadro1" style="font-size:34px; " value="0" type="text" class="validate">
+                                    <select id="select1">                        
+                                        <option value="1">Pesos Argentinos</option>
+                                        <option value="2">Dolares</option>
+                                        <option value="3">Euros</option>
+                                        <option value="4">Reales</option>
+                                        <option value="5">Pesos Chilenos</option>
+                                        <option value="5">Pesos Uruguayos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col s12 m2 l2" style="margin-top:8%;margin-bottom:8%;">
+                                <a id="btnConvertir" onclick="convertir()"class="btn-floating btn-large waves-effect waves-light grey darken-1">
+                                    <i class="material-icons">trending_flat</i></a>
+                            </div>
+                            <div class="col s12 m5 l5">
+                                <div class="card-panel white">
+                                    <input  readonly id="cuadro2" style="font-size:34px; " value="0" type="text" class="validate">
+                                    <select id="select2">                        
+                                        <option value="1">Pesos Argentinos</option>
+                                        <option value="2">Dolares</option>
+                                        <option value="3">Euros</option>
+                                        <option value="4">Reales</option>
+                                        <option value="5">Pesos Chilenos</option>
+                                        <option value="5">Pesos Uruguayos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container" id="cont-creditos">
+                                <h1 id="creditos">Codigo By Mateo de Mayo</h1>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--BOTON FALSO-->
+        <div id="trolea" class="col s12">
+            <div class="card-panel grey darken-3">
+                <div class = "trolea" style="height:472px;">
+                    <input type="button" id="trolerino" value="Tocame" onmouseover = "trolea()" onclick = "mediste()"/>
+                </div>
+            </div>        
+        </div>
+
+        <!--CRONOMETRO-->
+        <div id="cronometro" class="col s12">        
+            <div class = "cron" id="crono">
+                <div class="card-panel grey darken-3" id="card-panel-cronometro">
+                    <div id="reloj-cron">00 : 00 : 00 : 00</div>
+                    <form name="cronbutton" action="#">
+                        <div class = "botoncron">
+                            <div class ="aa">
+                                <a style="margin-left:11%;" onclick="empipara()"class="btn-floating"><i class="material-icons">play_arrow</i></a>
+                                <a style="margin-left:2%;" onclick="empipara()"class="btn-floating"><i class="material-icons">pause</i></a></div>
+                            <div class="aa">
+                                <a style="margin-left:11%;" onclick="contren()"class="btn-floating"><i class="material-icons">fast_forward</i></a>
+                                <a style="margin-left:2%;" onclick="contren()"class="btn-floating"><i class="material-icons">replay</i></a></div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+
+    //CALCULADORA
+    reset = false;
+
+    function ejecutar(insertar){
+        toco = insertar.value;
+        val = document.getElementById("res").value;
+        if (toco=="="){
+            if(val.length !=0) {
+                result = eval(val);
+                document.getElementById("res").setAttribute("value",result);
+            }
+            reset = true;
+        }else{
+            if (reset){
+                document.getElementById("res").setAttribute("value",toco);
+            }else{
+                document.getElementById("res").setAttribute("value",val+toco);
+            }
+            reset = false;
+        }
+    }
+
+
+    //CONVERSOR
+    //By Mateo de Mayo
+    (function($){
+        $(function(){
+            $('select').material_select();
+        });
+    })(jQuery);
+
+    var relacion = [1.0, 8.86387, 9.49214, 2.92509, 0.01449, 0.32991]
+    function convertir(){
+        var cuadro1 = parseFloat(document.getElementById("cuadro1").value);
+        var cuadro2 = document.getElementById('cuadro2');
+        var select1 = document.getElementById("select1").selectedIndex;
+        var select2 = document.getElementById("select2").selectedIndex;
+        var res = (relacion[select1] * cuadro1) / relacion[select2];
+        cuadro2.value= res.toFixed(5);
+    }
+
+
+    //TROLEA BOTON FALSO
+    //var caso=0;
+    function trolea () {
+
+        var div = document.getElementById("trolerino")
+        var top = Math.random()*30;
+        var side = Math.random()*93;
+
+        if(top>div.height){
+            console.log("antes "+top)
+            div.style.marginTop = top+"%";
+            div.style.marginLeft = side+"%";
+            console.log("despues "+top)
+        }else{
+            console.log("else "+top)
+            div.style.marginTop = top+"%";
+            div.style.marginRight = side+"%";
+        }
+    }
+
+    function mediste() {
+        Materialize.toast('Me Tocaste!', 2000 , 'rounded')
+    }
+
+
+    //CRONOMETRO
+    window.onload = function() {
+        visor=document.getElementById("reloj-cron"); //localizar pantalla del reloj
+    }
+
+    //variables de inicio:
+    var marcha=0; //control del temporizador
+    var cro=0; //estado inicial del cronómetro.
+    var aa=document.getElementById("aa");
+    //cronometro en marcha. Empezar en 0:
+    function empipara() {
+        if (marcha==0) { //solo si el cronómetro esta parado
+            emp=new Date() //fecha actual
+            elcrono=setInterval(tiempo,10); //función del temporizador.
+            marcha=1 //indicamos que se ha puesto en marcha.
+
+        } else { //sólo si está en funcionamiento
+            clearInterval(elcrono); //parar el crono
+            marcha=0; //indicar que está parado.
+        }
+    }
+
+    function tiempo() { //función del temporizador
+        actual=new Date() //fecha en el instante
+        cro=actual-emp //tiempo transcurrido en milisegundos
+        cr=new Date() //fecha donde guardamos el tiempo transcurrido
+        cr.setTime(cro) 
+        cs=cr.getMilliseconds() //milisegundos del cronómetro
+        cs=cs/10; //paso a centésimas de segundo.
+        cs=Math.round(cs)
+        sg=cr.getSeconds(); //segundos del cronómetro
+        mn=cr.getMinutes(); //minutos del cronómetro
+        ho=cr.getHours()-21; //horas del cronómetro
+        if (cs<10) {cs="0"+cs;}  //poner siempre 2 cifras en los números
+        if (sg<10) {sg="0"+sg;} 
+        if (mn<10) {mn="0"+mn;} 
+        visor.innerHTML=ho+" : "+mn+" : "+sg+" : "+cs; //pasar a pantalla.
+    }		 
+
+    function contren() {
+        console.log(marcha)
+        if (marcha==0) { //sólo si el crono está parado
+            emp2=new Date(); //fecha actual
+            emp2=emp2.getTime(); //pasar a tiempo Unix
+            emp3=emp2-cro; //restar tiempo anterior
+            emp=new Date(); //nueva fecha inicial para pasar al temporizador 
+            emp.setTime(emp3); //datos para nueva fecha inicial.
+            elcrono=setInterval(tiempo,10); //activar temporizador
+            marcha=1;
+        } else {clearInterval(elcrono); //parar el crono
+                marcha=0;
+                cro=0; //tiempo transcurrido a cero
+                visor.innerHTML = "0 : 00 : 00 : 00";}		
+    }
+
+    function vuelta() {
+        if(marcha==1){
+            aux = aux + 1;
+            var node = document.createElement("a");
+            var br = document.createElement("br");
+            var tx = document.createTextNode(aux);
+            node.appendChild(tx);
+            document.getElementById("vs").appendChild(node).appendChild(br);
+        }else {
+            console.log("so tonto vo");
+        }
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Proyecto de blog</title>
+
+        <!-- Bootstrap Core CSS -->
+        <!--<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">--->
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style_2-0.css' %}" rel="stylesheet">
+        <link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <!--<link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">-->
+
+        <!-- Custom Fonts--> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery.js' %}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+
+        <!-- Materializer Core JavaScript -->
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+
+
+        {% block css %}    
+        {% endblock %}
+
+    </head>
+
+    <body>
+
+        <nav>
+            <div class="nav-wrapper grey darken-1"><!-- nav-bar-logo (para cambiar color antes del nav-wrapper)--->
+                <a href="#!" class="brand-logo right">BlogTuna</a>
+                <ul id="id-nav-bar-top" class="left cl-nav-bar-top">
+                    <li><a href="{% url 'admin:index' %}">ADMIN</a></li>
+                    <li><a href="{% url 'PyWEB:sobreyo' %}">SOBRE MI</a></li>
+                    <li><a href="{% url 'PyWEB:acti' %}">EJERSISIOS</a></li>
+                    <li><a href="{% url 'PyWEB:contact' %}">CONTACTAME</a></li>
+                    <li><a href="{% url 'PyWEB:home' %}">INICIO</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+        {% block comentario %}
+        {% endblock %}
+
+        <footer class="page-footer grey darken-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Agradecimientos</h5>
+                        <p class="grey-text text-lighten-4">Pagina creada por Gaston Fortuna. Con la ayuda de Mateo de Mayo y Rodrigo Toledo.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Contactos</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="https://twitter.com/">Twitter</a></li>
+                            <li><a class="grey-text text-lighten-3" href="https://instagram.com/">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright grey darken-3" style="margin-bottom:-5%;">
+                <div class="container ">
+                    © Software Libre!
+                    <a class="grey-text text-lighten-4 right">DJango</a>
+                </div>
+            </div>
+        </footer>      
+
+    </body>
+
+    <script>
+        //Esto es para el Parralax
+        $(document).ready(function(){
+            $('.parallax').parallax();
+        });
+
+        //Form chose box
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+
+    </script>
+
+    {% block scripts %}
+    {% endblock %}
+
+</html>

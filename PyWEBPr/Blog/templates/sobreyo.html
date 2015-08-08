@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div class="parallax-container" style="margin-top:0.5%;height:400px;margin-left:-0.01%;">
+    <div class="parallax"><img src="/static/img/curri.jpg"></div>
+    <div class="caption right-align" style="margin-right:2%;">
+        <h3 class="white-text">El Curriculumnossio</h3>
+        <h5 class="light grey-text text-lighten-3">Donde esta mi informacionossio.</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m4">
+        <div class="card-panel">
+            <h5 class="center red-text">Informacion Personal</h3>
+            <div class="col s4">
+                <img src="/static/img/34D.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <span class="black-text">Nombre : Fortuna Gaston <br> DNI : 40684159 <br> Edad : 17 <br> Fecha de Nacimiento : 1997 <br> Estado Civil : Soltero <br> Direccion : M.Pablo Cabrara 2528   
+            </span>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card-panel">
+            <h5 class="center red-text">Estudios</h3>
+            <span class="black-text">Primaria : Inmaculada Concepcion (Castro Barros).<br>Seundaria : Estudiante del Villada , Programacion <br> Universidad : No llegue <br> Ingles : Englishland (Julian Paz)
+            </span>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card-panel">
+            <h5 class="center red-text">Experiencia Laboral</h3>
+            <span class="black-text">Mi unica experiencia laboral , es trabajar en la empresa familiar de mi padre . Conocida como Ingenieria y Publicidad . Haciendo actividades como pintar ropa , lapizeras , mochilas , bolsos . Tambien armado de bolsos , cartucheras , llaveros o acreditaciones.
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="parallax-container" style="margin-top:0.5%;height:400px;margin-left:-0.01%;">
+    <div class="parallax"><img src="/static/img/curri.jpg"></div>
+</div>
+{% endblock %}

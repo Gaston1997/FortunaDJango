@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div class="parallax-container" style="margin-top:0.5%;height:400px;margin-left:-0.01%;">
+    <div class="parallax"><img src="/static/img/cont.jpg"></div>
+    <div class="container" style="margin-left:1%;margin-top:18%;"><h3 style="color:#e53935">Envianos tu Opinion o Sugerencia</h3><h4 style="color:#e53935">Muchas gracias por su aporte!</h4></div>
+</div>
+
+<div class="section">
+    <div class="row center white" style="width:1000px;border-radius:10px;">
+        <form class="col s12" action="" method="POST" name="sentMessage" id="contactForm">
+            {% csrf_token %} 
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input name="nombre" id="name" type="text" class="validate form-control" required data-validation-required-message="Por favor ingresa tu nombre">
+                    <label for="name">Nombre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="sugerencia" id="suger" type="text" length="10" class="validate form-control" required data-validation-required-message="Por favor un titulo">
+                    <label for="name">Sugerencia/Opinion</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea class="materialize-textarea" id="descrip" name="descripcion" type="text" length="300" required data-validation-required-message="Por favor ingresa una descripcion"></textarea>
+                    <label for="textarea1">Textarea</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light grey darken-1" type="submit" name="action" style="margin-bottom:2%;">Enviar<i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
